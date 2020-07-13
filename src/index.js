@@ -32,6 +32,11 @@ export default grapesjs.plugins.add('gjs-plugin-ckeditor', (editor, opts = {}) =
       	return rte;
       }
 
+      if (CKEDITOR.instances && CKEDITOR.instances[el.id]) {
+        // Destroy editor instance before recreating it.
+	CKEDITOR.instances[el.id].destroy();
+      }
+
       el.contentEditable = true;
 
       // Seems like 'sharedspace' plugin doesn't work exactly as expected
